@@ -1,9 +1,9 @@
 ﻿using GTA.UI;
 
-using Accurate_throttle_for_aircraft.user_interfaces.creators.resources.structs;
+using Alternative_throttle_control.user_interfaces.creators.resources.structs;
 
 
-namespace Accurate_throttle_for_aircraft.user_interfaces.creators
+namespace Alternative_throttle_control.user_interfaces.creators
 {
     internal abstract class TextElementCreator
     {

@@ -1,11 +1,11 @@
 ﻿using GTA.UI;
 
-using Accurate_throttle_for_aircraft.user_interfaces.creators;
+using Alternative_throttle_control.user_interfaces.creators;
 
-using Accurate_throttle_for_aircraft.user_interfaces.creators.resources.structs;
+using Alternative_throttle_control.user_interfaces.creators.resources.structs;
 
 
-namespace Accurate_throttle_for_aircraft.user_interfaces.managers
+namespace Alternative_throttle_control.user_interfaces.managers
 {
     internal sealed class ContainerElementManager : ContainerElementCreator
     {

@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace Accurate_throttle_for_aircraft.user_interfaces.creators.resources.interfaces
+namespace Alternative_throttle_control.user_interfaces.creators.resources.interfaces
 {
     internal interface IConfiguration
     {

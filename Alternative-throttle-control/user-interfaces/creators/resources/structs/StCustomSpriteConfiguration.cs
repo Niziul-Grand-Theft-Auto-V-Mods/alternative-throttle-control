@@ -1,9 +1,9 @@
 ﻿using System.Drawing;
 
-using Accurate_throttle_for_aircraft.user_interfaces.creators.resources.interfaces;
+using Alternative_throttle_control.user_interfaces.creators.resources.interfaces;
 
 
-namespace Accurate_throttle_for_aircraft.user_interfaces.creators.resources.structs
+namespace Alternative_throttle_control.user_interfaces.creators.resources.structs
 {
     internal struct StCustomSpriteConfiguration : IConfiguration
     {
