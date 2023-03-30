@@ -243,12 +243,6 @@ namespace Alternative_throttle_control.user_interfaces.interfaces
                 .Scale = 0.60f;
 
             textElementFlyYawRight
-                .Outline = false;
-
-            textElementFlyYawRight
-                .Shadow = false;
-
-            textElementFlyYawRight
                 .Font = GTAFont.Pricedown;
 
             textElementFlyYawRight
@@ -270,12 +264,6 @@ namespace Alternative_throttle_control.user_interfaces.interfaces
 
             textElementFlyYawLeft
                 .Scale = 0.55f;
-
-            textElementFlyYawLeft
-                .Outline = false;
-
-            textElementFlyYawLeft
-                .Shadow = false;
 
             textElementFlyYawLeft
                 .Font = GTAFont.Pricedown;

@@ -31,6 +31,12 @@
 <p><strong>Changelog</strong></p>
 
 <ul>
+	<li>[v0.1.2.0]
+	<ul>
+		<li>I have updated the interface, especially the speedometer part to something more visible.</li>
+		<li>Code improvements in general.</li>
+	</ul>
+	</li>
 	<li>[v0.1.1.0]
 	<ul>
 		<li>this version of the script comes with some of the additions requested by the community,&nbsp;they are:&nbsp;
