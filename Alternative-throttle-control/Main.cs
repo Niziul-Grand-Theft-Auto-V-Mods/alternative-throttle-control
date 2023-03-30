@@ -1,6 +1,7 @@
-﻿using Alternative_throttle_control.alternative_throttle_control;
+﻿using Alternative_throttle_control.script;
 using Alternative_throttle_control.user_interfaces;
 using GTA;
+using GTA.UI;
 
 namespace Alternative_throttle_control
 {
@@ -23,9 +24,9 @@ namespace Alternative_throttle_control
                 {
                     case true:
                         {
-                            if (_alternativeThrottleControl == null
+                            if (_alternativeThrottleControl is null
                                 ||
-                                _userInterfaces == null)
+                                _userInterfaces is null)
                             {
                                 _alternativeThrottleControl
                                     = InstantiateScript<AlternativeThrottleControl>();
@@ -54,23 +55,25 @@ namespace Alternative_throttle_control
                         return;
                     case false:
                         {
-                            if (_alternativeThrottleControl == null
+                            if (_alternativeThrottleControl is null
                                 ||
-                                _userInterfaces == null)
+                                _userInterfaces is null)
                             {
                                 return;
                             }
 
-                            if (!_alternativeThrottleControl.IsPaused
+                            if (_alternativeThrottleControl.IsPaused
                                 ||
-                                !_userInterfaces.IsPaused)
+                                _userInterfaces.IsPaused)
                             {
-                                _alternativeThrottleControl
-                                    .Pause();
-
-                                _userInterfaces
-                                    .Pause();
+                                return;
                             }
+
+                            _alternativeThrottleControl
+                                .Pause();
+
+                            _userInterfaces
+                                .Pause();
                         }
                         return;
                 }
@@ -80,9 +83,9 @@ namespace Alternative_throttle_control
 
             Aborted += (o, e) =>
             {
-                if (_alternativeThrottleControl == null
+                if (_alternativeThrottleControl is null
                     ||
-                    _userInterfaces == null)
+                    _userInterfaces is null)
                 {
                     return;
                 }
