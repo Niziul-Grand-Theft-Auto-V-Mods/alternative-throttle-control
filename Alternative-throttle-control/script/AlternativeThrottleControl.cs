@@ -1,13 +1,11 @@
 ﻿using Alternative_throttle_control.settings;
 using GTA;
 using System.Windows.Forms;
-using CTimer
-      = Alternative_throttle_control.tools.Timer;
 using GTAControl
       = GTA.Control;
 
 
-namespace Alternative_throttle_control.alternative_throttle_control
+namespace Alternative_throttle_control.script
 {
     [ScriptAttributes(NoDefaultInstance = true)]
     internal sealed class AlternativeThrottleControl : Script
@@ -16,9 +14,6 @@ namespace Alternative_throttle_control.alternative_throttle_control
         {
             var keyThatDeterminesTheIncreaseOrDecreaseOfTheValues
                 = Keys.NumPad3;
-
-            var timer
-                = new CTimer();
 
             var settingsManager
                 = new SettingsManager();
@@ -41,42 +36,36 @@ namespace Alternative_throttle_control.alternative_throttle_control
             var throttleDownValue
                 = 0.25f;
 
-            Tick += (o, e) =>
+            Tick    += (o, e) =>
             {
-                switch (Game.Player.Character.IsInFlyingVehicle)
+                if (Game
+                        .IsControlJustPressed(GTAControl
+                                                    .VehicleExit))
                 {
-                    case false:
-                        {
-                            IdleThrottle();
-                        }
-                        return;
-                    case true:
-                        {
-                            Game
-                                .SetControlValueNormalized(GTAControl
-                                                                .VehicleFlyThrottleUp, throttleUpValue);
-                            Game
-                                .SetControlValueNormalized(GTAControl
-                                                                .VehicleFlyThrottleDown, throttleDownValue);
+                    IdleThrottle();
+                }
 
+                Game
+                    .SetControlValueNormalized(GTAControl
+                                                    .VehicleFlyThrottleUp, throttleUpValue);
+                Game
+                    .SetControlValueNormalized(GTAControl
+                                                    .VehicleFlyThrottleDown, throttleDownValue);
 
-                            if (Game
-                                    .IsKeyPressed(keyForTheThrottleUp))
-                            {
-                                IncreaseThrottle();
+                if (Game
+                        .IsKeyPressed(keyForTheThrottleUp))
+                {
+                    IncreaseThrottle();
 
-                                return;
-                            }
+                    return;
+                }
 
-                            if (Game
-                                    .IsKeyPressed(keyForTheThrottleDown))
-                            {
-                                DecreaseThrottle();
+                if (Game
+                        .IsKeyPressed(keyForTheThrottleDown))
+                {
+                    DecreaseThrottle();
 
-                                return;
-                            }
-                        }
-                        return;
+                    return;
                 }
             };
 
@@ -106,79 +95,79 @@ namespace Alternative_throttle_control.alternative_throttle_control
             {
                 if (keyThatDeterminesTheIncreaseOrDecreaseOfTheValues == keyForTheThrottleUp)
                 {
-                    ThrottleUp();
+                    IncreaseThrottleUp();
                 }
 
                 if (keyThatDeterminesTheIncreaseOrDecreaseOfTheValues == keyForTheThrottleDown)
                 {
-                    ThrottleDown();
+                    DecreaseThrottleUp();
                 }
 
                 return;
 
-                void ThrottleUp()
+                void IncreaseThrottleUp()
                 {
                     if (throttleUpValue > 1f)
                         throttleUpValue = 1f;
 
                     if (throttleUpValue < 1f)
-                        throttleUpValue += throttleSensitivity;
+                        throttleUpValue += throttleSensitivity + (Game.LastFrameTime / 5f);
                 }
 
-                void ThrottleDown()
+                void DecreaseThrottleUp()
                 {
                     if (throttleDownValue < 0.25f)
                         throttleDownValue = 0.25f;
 
-                    if (timer
-                            .ReturnsTrueForEach(1))
+                    if (throttleDownValue == 0.25f)
                     {
-                        if (throttleDownValue == 0.25f)
-                            keyThatDeterminesTheIncreaseOrDecreaseOfTheValues = Keys.NumPad3;
+                        Yield();
+
+                        keyThatDeterminesTheIncreaseOrDecreaseOfTheValues = Keys.NumPad3;
                     }
 
                     if (throttleDownValue > 0.25f)
-                        throttleDownValue -= throttleSensitivity;
+                        throttleDownValue -= throttleSensitivity + (Game.LastFrameTime / 5f);
                 }
             }
 
             void DecreaseThrottle()
             {
-                if (keyThatDeterminesTheIncreaseOrDecreaseOfTheValues == keyForTheThrottleUp)
-                {
-                    ThrottleDown();
-                }
-
                 if (keyThatDeterminesTheIncreaseOrDecreaseOfTheValues == keyForTheThrottleDown)
                 {
-                    ThrottleUp();
+                    IncreaseThrottleDown();
+                }
+
+                if (keyThatDeterminesTheIncreaseOrDecreaseOfTheValues == keyForTheThrottleUp)
+                {
+                    DecreaseThrottleDown();
                 }
 
                 return;
 
-                void ThrottleDown()
-                {
-                    if (throttleUpValue < 0.25f)
-                        throttleUpValue = 0.25f;
-
-                    if (timer
-                            .ReturnsTrueForEach(1))
-                    {
-                        if (throttleUpValue == 0.25f)
-                            keyThatDeterminesTheIncreaseOrDecreaseOfTheValues = Keys.NumPad3;
-                    }
-
-                    if (throttleUpValue > 0.25f)
-                        throttleUpValue -= throttleSensitivity;
-                }
-
-                void ThrottleUp()
+                void IncreaseThrottleDown()
                 {
                     if (throttleDownValue > 1f)
                         throttleDownValue = 1f;
 
                     if (throttleDownValue < 1f)
-                        throttleDownValue += throttleSensitivity;
+                        throttleDownValue += throttleSensitivity + (Game.LastFrameTime / 5f);
+                }
+
+                void DecreaseThrottleDown()
+                {
+                    if (throttleUpValue < 0.25f)
+                        throttleUpValue = 0.25f;
+
+                    if (throttleUpValue == 0.25f)
+                    {
+                        Yield();
+
+                        keyThatDeterminesTheIncreaseOrDecreaseOfTheValues = Keys.NumPad3;
+                    }
+
+                    if (throttleUpValue > 0.25f)
+                        throttleUpValue -= throttleSensitivity + (Game.LastFrameTime / 5f);
                 }
             }
         }

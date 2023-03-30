@@ -1,10 +1,5 @@
-﻿using Alternative_throttle_control.settings;
-using Alternative_throttle_control.user_interfaces.creators.resources.structs;
-using Alternative_throttle_control.user_interfaces.interfaces;
-using Alternative_throttle_control.user_interfaces.managers;
+﻿using Alternative_throttle_control.user_interfaces.interfaces;
 using GTA;
-using GTA.UI;
-using System.Drawing;
 
 namespace Alternative_throttle_control.user_interfaces
 {
@@ -18,19 +13,20 @@ namespace Alternative_throttle_control.user_interfaces
 
             Tick    += (o, e) =>
             {
-                if (Game.Player.Character.IsInFlyingVehicle)
+                if (Game
+                        .IsControlJustPressed(Control
+                                                .VehicleExit))
                 {
-                    throttleInterface
-                        .BuildTheInterface();
-
-                    throttleInterface
-                        .ShowTheInterface();
+                    Wait(5000);
 
                     return;
                 }
 
                 throttleInterface
-                    .RemoveTheInterface();
+                    .BuildTheInterface();
+
+                throttleInterface
+                    .ShowTheInterface();
             };
 
             Aborted += (o, e) =>

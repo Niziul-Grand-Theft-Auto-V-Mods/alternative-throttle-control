@@ -1,4 +1,4 @@
-<p><a href="https://www.gta5-mods.com/scripts/accurate-throttle-for-aircraft-keyboards#description_tab" target="_blank"><img alt="Alternative Yaw Control - Keyboards" src="/Repository-assets/Alternative-throttle-control/Cover.png" /></a></p>
+<p><a href="https://www.gta5-mods.com/scripts/accurate-throttle-for-aircraft-keyboards#description_tab" target="_blank"><img alt="Alternative Yaw Control - Keyboards" src="https://img.gta5-mods.com/q95/images/accurate-throttle-for-aircraft-keyboards/a08472-alternative-throttle-input-control.png" /></a></p>
 
 <p><strong>About the mod</strong></p>
 

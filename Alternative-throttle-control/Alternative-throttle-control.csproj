@@ -42,11 +42,10 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="alternative-throttle-control\AlternativeThrottleControl.cs" />
+    <Compile Include="script\AlternativeThrottleControl.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="settings\SettingsManager.cs" />
-    <Compile Include="tools\Timer.cs" />
     <Compile Include="user-interfaces\creators\ContainerElementCreator.cs" />
     <Compile Include="user-interfaces\creators\CustomSpriteCreator.cs" />
     <Compile Include="user-interfaces\creators\resources\interfaces\IConfiguration.cs" />
