@@ -1,6 +1,4 @@
-<p>
-  <a href="https://www.gta5-mods.com/scripts/accurate-throttle-for-aircraft-keyboards#description_tab" target="_blank"><img alt="Alternative Yaw Control - Keyboards" src="https://img.gta5-mods.com/q95/images/accurate-throttle-for-aircraft-keyboards/a08472-alternative-throttle-input-control.png"/></a>
-</p>
+<p><a href="https://www.gta5-mods.com/scripts/accurate-throttle-for-aircraft-keyboards#description_tab" target="_blank"><img alt="Alternative Yaw Control - Keyboards" src="/Repository-assets/Alternative-throttle-control/Cover.png" /></a></p>
 
 <p><strong>About the mod</strong></p>
 
@@ -9,8 +7,8 @@
 <p><strong>Requisites</strong></p>
 
 <ul>
-	<li><a href="http://www.dev-c.com/gtav/scripthookv/" target="_blank">Script Hook V - [v1.0.2699.16]</a></li>
-	<li><a href="https://github.com/crosire/scripthookvdotnet/releases" target="_blank">Script Hook V DotNet - [v3.5.1]</a></li>
+	<li><a href="http://www.dev-c.com/gtav/scripthookv/" target="_blank">Script Hook V - [v1.0.2802.0]</a></li>
+	<li><a href="https://github.com/crosire/scripthookvdotnet/releases" target="_blank">Script Hook V DotNet - [v3.6.0]</a></li>
 </ul>
 
 <p><strong>Featured</strong></p>
@@ -31,9 +29,16 @@
 <p><strong>Changelog</strong></p>
 
 <ul>
+	<li>[0.1.3.0]
+	<ul>
+		<li>Added support for throttle down;</li>
+		<li>Interface update, where you can see the throttle input percentage, both throttle up and throttle down;</li>
+		<li>Improve the performance of the script;</li>
+	</ul>
+	</li>
 	<li>[0.1.2.1]
 	<ul>
-		<li>Fix bug "System.IndexOutOfRangeExceptio".</li>
+		<li>Fix bug &quot;System.IndexOutOfRangeException&quot;.</li>
 	</ul>
 	</li>
 	<li>[0.1.2.0]

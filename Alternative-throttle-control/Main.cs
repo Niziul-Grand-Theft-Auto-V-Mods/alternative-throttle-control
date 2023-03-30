@@ -1,103 +1,104 @@
-﻿using GTA;
-
-using GTAControl
-      = GTA.Control;
-
-using System.Windows.Forms;
-
-using Alternative_throttle_control.settings;
+﻿using Alternative_throttle_control.alternative_throttle_control;
+using Alternative_throttle_control.user_interfaces;
+using GTA;
 
 namespace Alternative_throttle_control
 {
     internal sealed class Main : Script
     {
-        private readonly Keys _keyForThrottleIncrease;
+        private AlternativeThrottleControl _alternativeThrottleControl;
 
-        private readonly Keys _keyForThrottleDecrease;
+        private UserInterfaces _userInterfaces;
 
-        private float _throttleSensitivity;
-
-        private float _throttleValue;
-        
         public Main()
         {
-            var settingsManager
-                = new SettingsManager();
-            
-            _keyForThrottleIncrease
-                = settingsManager
-                        .ReturnTheKeyForTheThrottleIncrease();
-
-            _keyForThrottleDecrease
-                = settingsManager
-                        .ReturnTheKeyForTheThrottleDecrease();
-
-            _throttleSensitivity
-                = settingsManager
-                        .ReturnTheThrottleSensitivity();
-
-            _throttleValue
-                = 0.25f;
-
             Tick    += (o, e) =>
             {
                 if (Game.IsLoading)
                 {
                     return;
-                }    
+                }
 
                 switch (Game.Player.Character.IsInFlyingVehicle)
                 {
                     case true:
                         {
-                            Game
-                                .SetControlValueNormalized(GTAControl
-                                                                .VehicleFlyThrottleUp, _throttleValue);
-
-                            if (Game
-                                    .IsKeyPressed(_keyForThrottleIncrease))
+                            if (_alternativeThrottleControl == null
+                                ||
+                                _userInterfaces == null)
                             {
-                                IncreaseThrottle();
+                                _alternativeThrottleControl
+                                    = InstantiateScript<AlternativeThrottleControl>();
+
+                                _userInterfaces
+                                    = InstantiateScript<UserInterfaces>();
+
+                                _alternativeThrottleControl
+                                    .Resume();
+
+                                _userInterfaces
+                                    .Resume();
                             }
 
-                            if (Game
-                                    .IsKeyPressed(_keyForThrottleDecrease))
+                            if (_alternativeThrottleControl.IsPaused
+                                ||
+                                _userInterfaces.IsPaused)
                             {
-                                DecreaseThrottle();
+                                _alternativeThrottleControl
+                                    .Resume();
+
+                                _userInterfaces
+                                    .Resume();
                             }
                         }
                         return;
                     case false:
                         {
-                            IdleThrottle();
+                            if (_alternativeThrottleControl == null
+                                ||
+                                _userInterfaces == null)
+                            {
+                                return;
+                            }
+
+                            if (!_alternativeThrottleControl.IsPaused
+                                ||
+                                !_userInterfaces.IsPaused)
+                            {
+                                _alternativeThrottleControl
+                                    .Pause();
+
+                                _userInterfaces
+                                    .Pause();
+                            }
                         }
                         return;
                 }
+
+                Interval = 2000;
+            };
+
+            Aborted += (o, e) =>
+            {
+                if (_alternativeThrottleControl == null
+                    ||
+                    _userInterfaces == null)
+                {
+                    return;
+                }
+
+                _alternativeThrottleControl
+                    .Abort();
+
+                _userInterfaces
+                    .Abort();
+
+                _alternativeThrottleControl
+                    = null;
+
+                _userInterfaces
+                    = null;
             };
         }
-
-        private void IncreaseThrottle()
-        {
-            if (_throttleValue > 1f)
-                _throttleValue = 1f;
-
-            if (_throttleValue < 1f)
-                _throttleValue += _throttleSensitivity;
-        }
-
-        private void DecreaseThrottle()
-        {
-            if (_throttleValue < 0.25f)
-                _throttleValue = 0.25f;
-
-            if (_throttleValue > 0.25f)
-                _throttleValue -= _throttleSensitivity;
-        }
-        
-        private void IdleThrottle()
-        {
-            if (_throttleValue != 0.25f)
-                _throttleValue = 0.25f;
-        }
-    }   
+    }
 }
