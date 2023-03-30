@@ -97,12 +97,10 @@ namespace Alternative_throttle_control.user_interfaces.interfaces
                 .ScaledDraw();
         }
 
-
         private void UpdateTheThrotlleLine()
         {
             var throttleUpValue
-                = Game
-                    .GetControlValueNormalized(Control.VehicleFlyThrottleUp);
+                = GetThrottleUpValue();
 
             if (throttleUpValue != 0f)
             {
@@ -123,8 +121,7 @@ namespace Alternative_throttle_control.user_interfaces.interfaces
                     .Caption = $"ThrUp - 0%";
 
             var throttleDownValue
-                = Game
-                    .GetControlValueNormalized(Control.VehicleFlyThrottleDown);
+                = GetThrottleDownValue();
 
             if (throttleDownValue != 0f)
             {
@@ -153,66 +150,45 @@ namespace Alternative_throttle_control.user_interfaces.interfaces
                     .Items[2]
                             .Position = _sliderInitialPosition;
             }
+            
+            float GetThrottleUpValue()
+            {
+                if (Game.Player.Character.IsInBoat)
+                {
+                    return _
+                           = Game
+                                .GetControlValueNormalized(Control.VehicleAccelerate);
+                }
+
+                if (Game.Player.Character.IsInFlyingVehicle)
+                {
+                    return _
+                           = Game
+                                .GetControlValueNormalized(Control.VehicleFlyThrottleUp);
+                }
+
+                return float.NaN;
+            }
+
+            float GetThrottleDownValue()
+            {
+                if (Game.Player.Character.IsInBoat)
+                {
+                    return _
+                           = Game
+                                .GetControlValueNormalized(Control.VehicleBrake);
+                }
+
+                if (Game.Player.Character.IsInFlyingVehicle)
+                {
+                    return _
+                           = Game
+                                .GetControlValueNormalized(Control.VehicleFlyThrottleDown);
+                }
+
+                return float.NaN;
+            }
         }
-
-        //private void UpdateTheYawLine()
-        //{
-        //    var throttleDownValue
-        //        = Game
-        //            .GetControlValueNormalized(Control.VehicleFlyThrottleDown);
-
-        //    if (throttleDownValue != 0f)
-        //    {
-        //        var updatePosition
-        //            = new PointF(_sliderInitialPosition.X + (throttleDownValue * 117.5f),
-        //                         _sliderInitialPosition.Y);
-
-        //        _textElements[3]
-        //            .Caption = $"{throttleDownValue * 100f:N1}% - ThrottleDown";
-
-        //        _containerElement
-        //            .Items[1]
-        //                    .Position = updatePosition;
-
-        //        return;
-        //    }
-
-        //    _textElements[3]
-        //            .Caption = $"0% - ThrottleDown";
-
-        //    var throttleUpValue
-        //        = Game
-        //            .GetControlValueNormalized(Control.VehicleFlyThrottleUp);
-
-        //    if (throttleUpValue != 0f)
-        //    {
-        //        var updatePosition
-        //            = new PointF(_sliderInitialPosition.X - (throttleUpValue * 117.5f),
-        //                         _sliderInitialPosition.Y);
-
-        //        _textElements[2]
-        //            .Caption = $"ThrottleUp: {throttleUpValue * 100f:N1}%";
-
-        //        _containerElement
-        //            .Items[1]
-        //                    .Position = updatePosition;
-
-        //        return;
-        //    }
-
-        //    _textElements[2]
-        //            .Caption = $"ThrottleUp - 0%";
-
-        //    if (_sliderInitialPosition != new PointF(0f, -2f))
-        //    {
-        //        _sliderInitialPosition
-        //            = new PointF(0f, -2.5f);
-
-        //        _containerElement
-        //            .Items[1]
-        //                    .Position = _sliderInitialPosition;
-        //    }
-        //}
 
         private void UpdateTheSpeedometer()
         {

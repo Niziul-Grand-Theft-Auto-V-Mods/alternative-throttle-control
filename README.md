@@ -29,6 +29,16 @@
 <p><strong>Changelog</strong></p>
 
 <ul>
+	<li>[0.1.3.1]
+	<ul>
+		<li>Correction for poor script performance at low frame rates;
+		<ul>
+			<li>This means that the script will work as intended no matter how poorly the game is performing.</li>
+		</ul>
+		</li>
+		<li>Code improvements in general;</li>
+	</ul>
+	</li>
 	<li>[0.1.3.0]
 	<ul>
 		<li>Added support for throttle down;</li>
@@ -43,23 +53,23 @@
 	</li>
 	<li>[0.1.2.0]
 	<ul>
-		<li>I have updated the interface, especially the speedometer part to something more visible.</li>
-		<li>Code improvements in general.</li>
+		<li>I have updated the interface, especially the speedometer part to something more visible;</li>
+		<li>Code improvements in general;</li>
 	</ul>
 	</li>
 	<li>[0.1.1.0]
 	<ul>
-		<li>this version of the script comes with some of the additions requested by the community,&nbsp;they are:&nbsp;
+		<li>This version of the script comes with some of the additions requested by the community,&nbsp;they are:&nbsp;
 		<ul>
-			<li>addition of speedometer with km/h, mph and knot support.</li>
-			<li>addition of the &quot;ScriptBehivior.ini&quot; file with the key settings and the possibility to adjust the throttle sensitivity.</li>
+			<li>Addition of speedometer with km/h, mph and knot support;</li>
+			<li>Addition of the &quot;ScriptBehivior.ini&quot; file with the key settings and the possibility to adjust the throttle sensitivity;</li>
 		</ul>
 		</li>
 	</ul>
 	</li>
 	<li>[0.1.0.0]
 	<ul>
-		<li>initial release</li>
+		<li>initial release;</li>
 	</ul>
 	</li>
 </ul>

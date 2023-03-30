@@ -5,6 +5,7 @@ using GTA.UI;
 
 namespace Alternative_throttle_control
 {
+    [ScriptAttributes(NoScriptThread = true)]
     internal sealed class Main : Script
     {
         private AlternativeThrottleControl _alternativeThrottleControl;
@@ -20,7 +21,9 @@ namespace Alternative_throttle_control
                     return;
                 }
 
-                switch (Game.Player.Character.IsInFlyingVehicle)
+                switch (Game.Player.Character.IsInFlyingVehicle
+                        ||
+                        Game.Player.Character.IsInBoat)
                 {
                     case true:
                         {

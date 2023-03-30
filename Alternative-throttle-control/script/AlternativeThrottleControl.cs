@@ -45,12 +45,25 @@ namespace Alternative_throttle_control.script
                     IdleThrottle();
                 }
 
-                Game
-                    .SetControlValueNormalized(GTAControl
-                                                    .VehicleFlyThrottleUp, throttleUpValue);
-                Game
-                    .SetControlValueNormalized(GTAControl
-                                                    .VehicleFlyThrottleDown, throttleDownValue);
+                if (Game.Player.Character.IsInBoat)
+                {
+                    Game
+                        .SetControlValueNormalized(GTAControl
+                                                        .VehicleAccelerate, throttleUpValue);
+                    Game
+                        .SetControlValueNormalized(GTAControl
+                                                        .VehicleBrake, throttleDownValue);
+                }
+
+                if (Game.Player.Character.IsInFlyingVehicle)
+                {
+                    Game
+                        .SetControlValueNormalized(GTAControl
+                                                        .VehicleFlyThrottleUp, throttleUpValue);
+                    Game
+                        .SetControlValueNormalized(GTAControl
+                                                        .VehicleFlyThrottleDown, throttleDownValue);
+                }
 
                 if (Game
                         .IsKeyPressed(keyForTheThrottleUp))
