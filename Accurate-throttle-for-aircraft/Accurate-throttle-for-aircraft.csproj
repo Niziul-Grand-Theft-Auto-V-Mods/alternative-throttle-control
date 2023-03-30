@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{26D0FDDA-415D-4951-B5A1-95CFDDDE6F32}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Accurate_throttle_for_aircraft</RootNamespace>
+    <AssemblyName>Accurate-throttle-for-aircraft</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ScriptHookVDotNet3">
+      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Grand Theft Auto V\ScriptHookVDotNet3.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Main.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="settings\SettingsManager.cs" />
+    <Compile Include="user-interfaces\creators\ContainerElementCreator.cs" />
+    <Compile Include="user-interfaces\creators\CustomSpriteCreator.cs" />
+    <Compile Include="user-interfaces\creators\resources\interfaces\IConfiguration.cs" />
+    <Compile Include="user-interfaces\creators\resources\structs\StContainerElementConfiguration.cs" />
+    <Compile Include="user-interfaces\creators\resources\structs\StCustomSpriteConfiguration.cs" />
+    <Compile Include="user-interfaces\creators\resources\structs\StTextElementConfiguration.cs" />
+    <Compile Include="user-interfaces\creators\TextElementCreator.cs" />
+    <Compile Include="user-interfaces\Elements.cs" />
+    <Compile Include="user-interfaces\managers\ContainerElementManager.cs" />
+    <Compile Include="user-interfaces\managers\CustomSpriteManager.cs" />
+    <Compile Include="user-interfaces\managers\TextElementManager.cs" />
+    <Compile Include="user-interfaces\UserInterfaces.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy "$(ProjectDir)\bin\Debug\Accurate-throttle-for-aircraft.dll" /y "C:\Program Files (x86)\Steam\steamapps\common\Grand Theft Auto V\scripts"</PostBuildEvent>
+  </PropertyGroup>
+</Project>
