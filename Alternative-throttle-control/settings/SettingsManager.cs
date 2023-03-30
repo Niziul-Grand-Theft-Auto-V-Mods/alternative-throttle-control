@@ -69,16 +69,6 @@ namespace Alternative_throttle_control.settings
                          @"\InterfaceSetup.ini";
             }
         }
-        internal string PathToDisplayCompatibilityFile
-        {
-            get
-            {
-                return _
-                       = PathToTheUserInterfaceResourcesFolder
-                         +
-                         @"\DisplayCompatibility.ini";
-            }
-        }
         internal string PathToBehaviorOfUserInterfaceElementsFile
         {
             get
@@ -208,27 +198,9 @@ namespace Alternative_throttle_control.settings
 
         internal PointF ReturnThePositionOfCenterOfScreen()
         {
-            var displayCompatibility 
-                = ScriptSettings
-                    .Load(PathToDisplayCompatibilityFile);
-
-            var aspectRatio 
-                = GTAScreen
-                    .AspectRatio;
-
-            var screenCompatibility 
-                = displayCompatibility
-                    .GetAllValues<string>(section: "Compatibility",
-                                          name   : $"{aspectRatio}")[0];
-
-            var screenCenterPosition 
-                = displayCompatibility
-                    .GetAllValues<string>(section: screenCompatibility,
-                                          name   : "ScreenCenterPosition")[0];
-
             return _ 
-                   = new PointF(x: float
-                                    .Parse(screenCenterPosition),
+                   = new PointF(x: GTAScreen
+                                        .ScaledWidth / 2f,
                                 y: 0f);
         }
         internal PointF ReturnTheCustomPositionOfCenterOfScreen()
