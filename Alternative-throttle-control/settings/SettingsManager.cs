@@ -1,17 +1,11 @@
-﻿using GTA;
-
+﻿using Alternative_throttle_control.user_interfaces.creators.resources.structs;
+using GTA;
+using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
+using System.Windows.Forms;
 using GTAScreen
       = GTA.UI.Screen;
-
-using System.IO;
-
-using System.Drawing;
-
-using System.Windows.Forms;
-
-using System.Collections.Generic;
-
-using Alternative_throttle_control.user_interfaces.creators.resources.structs;
 
 namespace Alternative_throttle_control.settings
 {
@@ -117,13 +111,13 @@ namespace Alternative_throttle_control.settings
 
             var key
                 = "_";
-            
+
             var value
                 = behaviorOfUserInterfaceElementsFile
                     .GetAllValues<string>(section,
                                           key)[0];
 
-            if (value != null 
+            if (value != null
                 &&
                 value == "On")
             {
@@ -174,7 +168,7 @@ namespace Alternative_throttle_control.settings
                 = interfaceOffsetPosition
                     .GetAllValues<string>(section: "InterfaceOffsetPosition",
                                           name   : "Y")[0];
-            
+
             return _
                    = new PointF(x: float
                                     .Parse(offsetPositionX),
@@ -182,7 +176,7 @@ namespace Alternative_throttle_control.settings
                                     .Parse(offsetPositionY));
         }
 
-        internal string  ReturnTheMeasurementSystemOfSpeedometer()
+        internal string ReturnTheMeasurementSystemOfSpeedometer()
         {
             var behaviorOfUserInterfaceElementsFile
                 = ScriptSettings
@@ -198,14 +192,14 @@ namespace Alternative_throttle_control.settings
 
         internal PointF ReturnThePositionOfCenterOfScreen()
         {
-            return _ 
+            return _
                    = new PointF(x: GTAScreen
                                         .ScaledWidth / 2f,
                                 y: 0f);
         }
         internal PointF ReturnTheCustomPositionOfCenterOfScreen()
         {
-            var positionOfCenterOfScreen 
+            var positionOfCenterOfScreen
                 = ReturnThePositionOfCenterOfScreen();
 
             return _
@@ -213,7 +207,7 @@ namespace Alternative_throttle_control.settings
                                                          .X * 1.8f,
                                 y: 680f);
         }
-        
+
         internal SizeF ReturnTheSizeOfThis(string imagePath)
         {
             var sizeOfImage

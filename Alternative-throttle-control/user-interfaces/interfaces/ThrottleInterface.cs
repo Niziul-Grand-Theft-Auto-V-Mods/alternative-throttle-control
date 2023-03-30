@@ -1,13 +1,10 @@
-﻿using GTA;
+﻿using Alternative_throttle_control.settings;
+using Alternative_throttle_control.user_interfaces.managers;
+using GTA;
 using GTA.UI;
+using System.Drawing;
 using GTAFont
       = GTA.UI.Font;
-
-using System.Drawing;
-
-using Alternative_throttle_control.settings;
-
-using Alternative_throttle_control.user_interfaces.managers;
 
 
 namespace Alternative_throttle_control.user_interfaces.interfaces
@@ -49,6 +46,7 @@ namespace Alternative_throttle_control.user_interfaces.interfaces
             _customSprites
                 = new[]
                 {
+                    ReturnCustomSpriteDefaultLayoutSpeedometer(),
                     ReturnCustomSpriteDefaultLayout(),
                     ReturnCustomSpriteLine()
                 };
@@ -59,6 +57,9 @@ namespace Alternative_throttle_control.user_interfaces.interfaces
             _containerElement
                 .Items.Add(_customSprites[1]);
 
+            _containerElement
+                .Items.Add(_customSprites[2]);
+
             if (_textElements != null)
             {
                 return;
@@ -68,7 +69,9 @@ namespace Alternative_throttle_control.user_interfaces.interfaces
                 = new[]
                 {
                     ReturnTextElementMeasurementSystem(),
-                    ReturnTextElementSpeedometer()
+                    ReturnTextElementSpeedometer(),
+                    ReturnTextElementThrottleUp(),
+                    ReturnTextElementThrottleDown()
                 };
 
             _containerElement
@@ -76,35 +79,140 @@ namespace Alternative_throttle_control.user_interfaces.interfaces
 
             _containerElement
                 .Items.Add(_textElements[1]);
+
+            _containerElement
+                .Items.Add(_textElements[2]);
+
+            _containerElement
+                .Items.Add(_textElements[3]);
         }
 
         internal void ShowTheInterface()
         {
             UpdateTheSpeedometer();
-            
+
             UpdateTheThrotlleLine();
 
             _containerElement
                 .ScaledDraw();
         }
 
+
         private void UpdateTheThrotlleLine()
         {
-            if (Game.GetControlValueNormalized(Control.VehicleFlyThrottleUp) != 0f)
-            {
-                var throttleValue
-                    = Game.GetControlValueNormalized(Control.VehicleFlyThrottleUp);
+            var throttleUpValue
+                = Game
+                    .GetControlValueNormalized(Control.VehicleFlyThrottleUp);
 
-                _customSprites[1]
-                    .Position = new PointF(_sliderInitialPosition.X - (throttleValue * 160.5f),
-                                           _sliderInitialPosition.Y);
+            if (throttleUpValue != 0f)
+            {
+                var updatePosition
+                    = new PointF(_sliderInitialPosition.X - (throttleUpValue * 240f / 2f),
+                                 _sliderInitialPosition.Y);
+
+                _textElements[2]
+                    .Caption = $"ThrUp - {throttleUpValue * 100f:N1}%";
+
+                _customSprites[2]
+                    .Position = updatePosition;
 
                 return;
             }
 
-            _sliderInitialPosition
-                    = new PointF(41f, 4f);
+            _textElements[2]
+                    .Caption = $"ThrUp - 0%";
+
+            var throttleDownValue
+                = Game
+                    .GetControlValueNormalized(Control.VehicleFlyThrottleDown);
+
+            if (throttleDownValue != 0f)
+            {
+                var updatePosition
+                    = new PointF(_sliderInitialPosition.X + (throttleDownValue * 232f / 2f),
+                                 _sliderInitialPosition.Y);
+
+                _textElements[3]
+                    .Caption = $"{throttleDownValue * 100f:N1}% - ThrDown";
+
+                _customSprites[2]
+                    .Position = updatePosition;
+
+                return;
+            }
+
+            _textElements[3]
+                    .Caption = $"0% - ThrDown";
+
+            if (_sliderInitialPosition != new PointF(0f, -9f))
+            {
+                _sliderInitialPosition
+                    = new PointF(0f, -9f);
+
+                _containerElement
+                    .Items[2]
+                            .Position = _sliderInitialPosition;
+            }
         }
+
+        //private void UpdateTheYawLine()
+        //{
+        //    var throttleDownValue
+        //        = Game
+        //            .GetControlValueNormalized(Control.VehicleFlyThrottleDown);
+
+        //    if (throttleDownValue != 0f)
+        //    {
+        //        var updatePosition
+        //            = new PointF(_sliderInitialPosition.X + (throttleDownValue * 117.5f),
+        //                         _sliderInitialPosition.Y);
+
+        //        _textElements[3]
+        //            .Caption = $"{throttleDownValue * 100f:N1}% - ThrottleDown";
+
+        //        _containerElement
+        //            .Items[1]
+        //                    .Position = updatePosition;
+
+        //        return;
+        //    }
+
+        //    _textElements[3]
+        //            .Caption = $"0% - ThrottleDown";
+
+        //    var throttleUpValue
+        //        = Game
+        //            .GetControlValueNormalized(Control.VehicleFlyThrottleUp);
+
+        //    if (throttleUpValue != 0f)
+        //    {
+        //        var updatePosition
+        //            = new PointF(_sliderInitialPosition.X - (throttleUpValue * 117.5f),
+        //                         _sliderInitialPosition.Y);
+
+        //        _textElements[2]
+        //            .Caption = $"ThrottleUp: {throttleUpValue * 100f:N1}%";
+
+        //        _containerElement
+        //            .Items[1]
+        //                    .Position = updatePosition;
+
+        //        return;
+        //    }
+
+        //    _textElements[2]
+        //            .Caption = $"ThrottleUp - 0%";
+
+        //    if (_sliderInitialPosition != new PointF(0f, -2f))
+        //    {
+        //        _sliderInitialPosition
+        //            = new PointF(0f, -2.5f);
+
+        //        _containerElement
+        //            .Items[1]
+        //                    .Position = _sliderInitialPosition;
+        //    }
+        //}
 
         private void UpdateTheSpeedometer()
         {
@@ -189,6 +297,20 @@ namespace Alternative_throttle_control.user_interfaces.interfaces
                    = containerElement;
         }
 
+        private CustomSprite ReturnCustomSpriteDefaultLayoutSpeedometer()
+        {
+            var customSpriteDefaultLayout
+                = ReturnTheCustomSpritesOfThis(filename: "DefaultLayoutSpeedometer");
+
+            customSpriteDefaultLayout
+                .Centered = true;
+
+            customSpriteDefaultLayout
+                .Position = new PointF(82f, -38f);
+
+            return _
+                   = customSpriteDefaultLayout;
+        }
         private CustomSprite ReturnCustomSpriteDefaultLayout()
         {
             var customSpriteDefaultLayout
@@ -212,7 +334,7 @@ namespace Alternative_throttle_control.user_interfaces.interfaces
                 .Centered = false;
 
             customSpriteLine
-                .Position = new PointF(40f, 3.5f);
+                .Position = new PointF(0f, -9f);
 
             return _
                    = customSpriteLine;
@@ -231,6 +353,46 @@ namespace Alternative_throttle_control.user_interfaces.interfaces
                    = customSprite;
         }
 
+        private TextElement ReturnTextElementThrottleUp()
+        {
+            var textElementFlyThrottleUp
+                = ReturnTheTextElementOfThis("ThrottleUp");
+
+            textElementFlyThrottleUp
+                .Font = GTAFont.Pricedown;
+
+            textElementFlyThrottleUp
+                .Alignment = Alignment.Right;
+
+            textElementFlyThrottleUp
+                .Position = new PointF(0f, 10f);
+
+            textElementFlyThrottleUp
+                .Scale = 0.35f;
+
+            return _
+                   = textElementFlyThrottleUp;
+        }
+        private TextElement ReturnTextElementThrottleDown()
+        {
+            var textElementFlyThrottleDown
+                = ReturnTheTextElementOfThis("ThrottleDown");
+
+            textElementFlyThrottleDown
+                .Font = GTAFont.Pricedown;
+
+            textElementFlyThrottleDown
+                .Alignment = Alignment.Left;
+
+            textElementFlyThrottleDown
+                .Position = new PointF(4f, 10f);
+
+            textElementFlyThrottleDown
+                .Scale = 0.35f;
+
+            return _
+                   = textElementFlyThrottleDown;
+        }
         private TextElement ReturnTextElementMeasurementSystem()
         {
             var textElementFlyYawRight
@@ -249,7 +411,7 @@ namespace Alternative_throttle_control.user_interfaces.interfaces
                 .Alignment = Alignment.Center;
 
             textElementFlyYawRight
-                .Position = new PointF(81f, -32f);
+                .Position = new PointF(81f, -64f);
 
             return _
                    = textElementFlyYawRight;
@@ -272,7 +434,7 @@ namespace Alternative_throttle_control.user_interfaces.interfaces
                 .Alignment = Alignment.Center;
 
             textElementFlyYawLeft
-                .Position = new PointF(81f, -8f);
+                .Position = new PointF(81f, -40f);
 
             return _
                    = textElementFlyYawLeft;
