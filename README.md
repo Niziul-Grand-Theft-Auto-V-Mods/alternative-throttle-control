@@ -1,36 +1,52 @@
-![](https://img.gta5-mods.com/q95/images/accurate-throttle-for-aircraft-keyboards/659906-accurate-throttle-for-aircraft.png)
+<p>
+  <a href="https://www.gta5-mods.com/scripts/accurate-throttle-for-aircraft-keyboards#description_tab" target="_blank"><img alt="Alternative Yaw Control - Keyboards" src="https://img.gta5-mods.com/q95/images/accurate-throttle-for-aircraft-keyboards/a08472-alternative-throttle-input-control.png"/></a>
+</p>
 
-<b>About the mod</b>
+<p><strong>About the mod</strong></p>
 
-Accurate throttle for Aircraft is a mod where we add the possibility to conduct the gradual and smooth increase of throttle of an aircraft using the keyboard.
-    
-By default, throttle by keyboard is somewhat binary, it's either 100%, or 0% there is no smooth as is found in throttle using joystick.
+<p>Alternative Throttle Control is a mod where we add the possibility to conduct the gradual and smooth increase of throttle of an aircraft using the keyboard.&nbsp;By default, throttle by keyboard is somewhat binary, it&#39;s either 100%, or 0% there is no smooth as is found in throttle using joystick. Currently you can increase the acceleration using <em>Add&nbsp;</em>and decrease it with <em>None</em>.</p>
 
-Currently you can increase the acceleration using <i>Oemplus</i> and decrease it with <i>OemMinus</i>. In the future I plan to add the possibility to choose the key by changing the startup file.
-
-<b>Requisites</b>
+<p><strong>Requisites</strong></p>
 
 <ul>
-       - <a href="http://www.dev-c.com/gtav/scripthookv/">Script Hook V | v1.0.2699.0 or higher</a>
+	<li><a href="http://www.dev-c.com/gtav/scripthookv/" target="_blank">Script Hook V - [v1.0.2699.16]</a></li>
+	<li><a href="https://github.com/crosire/scripthookvdotnet/releases" target="_blank">Script Hook V DotNet - [v3.5.1]</a></li>
 </ul>
+
+<p><strong>Featured</strong></p>
+
 <ul>
-       - <a href="https://github.com/crosire/scripthookvdotnet/releases">Script Hook V DotNet | v3.5.1</a>
+	<li>More assertive aircraft throttle control</li>
+	<li>A beautiful and minimalist interface where you can see how much power is being put into the throttle :)</li>
 </ul>
 
-<b>Featured</b>
+<p><strong>Installation</strong></p>
 
-- More assertive aircraft throttle control
-- A beautiful and minimalist interface where you can see how much power is being put into the throttle :)
+<ol>
+	<li>Access the mod page to download the necessary files by clicking on the image that is at the top of the file.;</li>
+	<li>Extract from the .rar file the Alternative-throttle-control.dll file and the folder named AlternativeThrottleControl;</li>
+	<li>Place the extracted files in your script folder</li>
+</ol>
 
-<b>Installation</b>
+<p><strong>Changelog</strong></p>
 
-Extract from the .rar file the Accurate-throttle-for-aircraft.dll file and the folder named AccurateThrottleForAircraft in the script folder.
+<ul>
+	<li>[v0.1.1.0]
+	<ul>
+		<li>this version of the script comes with some of the additions requested by the community,&nbsp;they are:&nbsp;
+		<ul>
+			<li>addition of speedometer with km/h, mph and knot support.</li>
+			<li>addition of the &quot;ScriptBehivior.ini&quot; file with the key settings and the possibility to adjust the throttle sensitivity.</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li>[v0.1.0.0]
+	<ul>
+		<li>initial release</li>
+	</ul>
+	</li>
+</ul>
 
-<b>Download</b>
+<p>&nbsp;</p>
 
-accessing the mod <a href="https://www.gta5-mods.com/scripts/accurate-throttle-for-aircraft-keyboards">page</a> on the gta5-mods website.
-
-<b>Changelog</b>
-
-- v0.1.0.0:
-   initial release.
